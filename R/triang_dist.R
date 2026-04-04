@@ -130,7 +130,9 @@ rtriang <- function(n, min = 0, max = 1, mode = 0.5) {
   if (any(mode < min | mode > max)) {
     stop("'mode' must be between 'min' and 'max'")
   }
-
+  if (length(n) != 1 || !is.numeric(n) || n < 0 || n != floor(n)) {
+    stop("'n' must be a non-negative integer")
+  }
   qtriang(stats::runif(n), min = min, max = max, mode = mode)
 }
 
