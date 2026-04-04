@@ -134,3 +134,35 @@ test_that("qtriang stops with invalid parameters", {
   expect_error(qtriang(0.5, min = 1, max = 0, mode = 0.5))
   expect_error(qtriang(0.5, min = 0, max = 1, mode = 2))
 })
+
+
+# Tests for rtriang
+# -------------------------
+
+test_that("rtriang returns correct number of values", {
+  expect_length(rtriang(10, min = 0, max = 1, mode = 0.5), 10)
+})
+
+test_that("rtriang returns values within [min, max]", {
+  set.seed(42)
+  x <- rtriang(1000, min = 0, max = 1, mode = 0.5)
+  expect_true(all(x >= 0 & x <= 1))
+})
+
+test_that("rtriang stops with invalid n", {
+  expect_error(rtriang(-1, min = 0, max = 1, mode = 0.5))
+  expect_error(rtriang(1.5, min = 0, max = 1, mode = 0.5))
+})
+
+test_that("rtriang stops with invalid parameters", {
+  expect_error(rtriang(10, min = 1, max = 0, mode = 0.5))
+  expect_error(rtriang(10, min = 0, max = 1, mode = 2))
+})
+
+test_that("rtriang is reproducible with set.seed", {
+  set.seed(123)
+  x1 <- rtriang(5, min = 0, max = 1, mode = 0.5)
+  set.seed(123)
+  x2 <- rtriang(5, min = 0, max = 1, mode = 0.5)
+  expect_equal(x1, x2)
+})
