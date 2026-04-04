@@ -94,3 +94,43 @@ test_that("ptriang and qtriang are inverse", {
   x <- qtriang(p, 0, 1, 0.5)
   expect_equal(ptriang(x, 0, 1, 0.5), p, tolerance = 1e-6)
 })
+
+
+# Tests for qtriang
+# -------------------------
+
+test_that("qtriang returns min when p = 0", {
+  expect_equal(qtriang(0, min = 0, max = 1, mode = 0.5), 0)
+})
+
+test_that("qtriang returns max when p = 1", {
+  expect_equal(qtriang(1, min = 0, max = 1, mode = 0.5), 1)
+})
+
+test_that("qtriang left branch is correct", {
+  expect_equal(qtriang(0.25, min = 0, max = 1, mode = 0.5), sqrt(0.25 * 1 * 0.5))
+})
+
+test_that("qtriang right branch is correct", {
+  expect_equal(qtriang(0.75, min = 0, max = 1, mode = 0.5), 1 - sqrt(0.25 * 1 * 0.5))
+})
+
+test_that("qtriang is inverse of ptriang", {
+  x <- c(0.1, 0.3, 0.5, 0.7, 0.9)
+  expect_equal(qtriang(ptriang(x, 0, 1, 0.5), 0, 1, 0.5), x)
+})
+
+test_that("qtriang is vectorized", {
+  result <- qtriang(c(0, 0.5, 1), min = 0, max = 1, mode = 0.5)
+  expect_equal(result, c(0, 0.5, 1))
+})
+
+test_that("qtriang stops when p is outside [0, 1]", {
+  expect_error(qtriang(1.5, min = 0, max = 1, mode = 0.5))
+  expect_error(qtriang(-0.1, min = 0, max = 1, mode = 0.5))
+})
+
+test_that("qtriang stops with invalid parameters", {
+  expect_error(qtriang(0.5, min = 1, max = 0, mode = 0.5))
+  expect_error(qtriang(0.5, min = 0, max = 1, mode = 2))
+})
