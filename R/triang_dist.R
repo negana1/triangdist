@@ -70,7 +70,6 @@ ptriang <- function(q, min = 0, max = 1, mode = 0.5, lower.tail = TRUE) {
       )
     )
   )
-
   if (!lower.tail) prob <- 1 - prob
   prob
 }
@@ -135,4 +134,3 @@ rtriang <- function(n, min = 0, max = 1, mode = 0.5) {
   }
   qtriang(stats::runif(n), min = min, max = max, mode = mode)
 }
-

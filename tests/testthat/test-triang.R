@@ -70,12 +70,16 @@ test_that("ptriang left branch is correct", {
 })
 
 test_that("ptriang right branch is correct", {
-  expect_equal(ptriang(0.75, min = 0, max = 1, mode = 0.5), 1 - 0.25^2 / (1 * 0.5))
+  expect_equal(ptriang(0.75, min = 0, max = 1, mode = 0.5),
+               1 - 0.25^2 / (1 * 0.5))
 })
 
 test_that("ptriang lower.tail = FALSE works", {
   p <- ptriang(0.3, min = 0, max = 1, mode = 0.5)
-  expect_equal(ptriang(0.3, min = 0, max = 1, mode = 0.5, lower.tail = FALSE), 1 - p)
+  expect_equal(
+    ptriang(0.3, min = 0, max = 1, mode = 0.5, lower.tail = FALSE),
+    1 - p
+  )
 })
 
 test_that("ptriang is vectorized", {
@@ -107,11 +111,13 @@ test_that("qtriang returns max when p = 1", {
 })
 
 test_that("qtriang left branch is correct", {
-  expect_equal(qtriang(0.25, min = 0, max = 1, mode = 0.5), sqrt(0.25 * 1 * 0.5))
+  expect_equal(qtriang(0.25, min = 0, max = 1, mode = 0.5),
+               sqrt(0.25 * 1 * 0.5))
 })
 
 test_that("qtriang right branch is correct", {
-  expect_equal(qtriang(0.75, min = 0, max = 1, mode = 0.5), 1 - sqrt(0.25 * 1 * 0.5))
+  expect_equal(qtriang(0.75, min = 0, max = 1, mode = 0.5),
+               1 - sqrt(0.25 * 1 * 0.5))
 })
 
 test_that("qtriang is inverse of ptriang", {
