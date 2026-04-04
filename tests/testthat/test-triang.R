@@ -1,5 +1,4 @@
 library(testthat)
-library(triangdist)
 
 
 # Tests for dtriang
