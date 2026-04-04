@@ -25,8 +25,8 @@ dtriang <- function(x, min = 0, max = 1, mode = 0.5, log = FALSE) {
     0,
     ifelse(
       x <= mode,
-      2 * (x - min) / ((max - min) * (mode - min + 1e-10)),
-      2 * (max - x) / ((max - min) * (max - mode + 1e-10))
+      2 * (x - min) / ((max - min) * (mode - min)),
+      2 * (max - x) / ((max - min) * (max - mode))
     )
   )
 
@@ -65,8 +65,8 @@ ptriang <- function(q, min = 0, max = 1, mode = 0.5, lower.tail = TRUE) {
       1,
       ifelse(
         q <= mode,
-        (q - min)^2 / ((max - min) * (mode - min + 1e-10)),
-        1 - (max - q)^2 / ((max - min) * (max - mode + 1e-10))
+        (q - min)^2 / ((max - min) * (mode - min)),
+        1 - (max - q)^2 / ((max - min) * (max - mode))
       )
     )
   )
@@ -104,8 +104,8 @@ qtriang <- function(p, min = 0, max = 1, mode = 0.5) {
 
   ifelse(
     p <= p_c,
-    min + sqrt(p * (max - min) * (mode - min + 1e-10)),
-    max - sqrt((1 - p) * (max - min) * (max - mode + 1e-10))
+    min + sqrt(p * (max - min) * (mode - min)),
+    max - sqrt((1 - p) * (max - min) * (max - mode))
   )
 }
 
