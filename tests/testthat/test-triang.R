@@ -50,12 +50,47 @@ test_that("dtriang stops with invalid parameters", {
 # Tests for ptriang
 # -------------------------
 
-test_that("ptriang boundaries", {
-  expect_equal(ptriang(0, 0, 1, 0.5), 0)
-  expect_equal(ptriang(1, 0, 1, 0.5), 1)
+test_that("ptriang returns 0 at min", {
+  expect_equal(ptriang(0, min = 0, max = 1, mode = 0.5), 0)
 })
 
-test_that("ptriang lower.tail", {
-  p <- ptriang(0.3, 0, 1, 0.5)
-  expect_equal(ptriang(0.3, 0, 1, 0.5, lower.tail = FALSE), 1 - p)
+test_that("ptriang returns 1 at max", {
+  expect_equal(ptriang(1, min = 0, max = 1, mode = 0.5), 1)
+})
+
+test_that("ptriang returns 0 below min", {
+  expect_equal(ptriang(-1, min = 0, max = 1, mode = 0.5), 0)
+})
+
+test_that("ptriang returns 1 above max", {
+  expect_equal(ptriang(2, min = 0, max = 1, mode = 0.5), 1)
+})
+
+test_that("ptriang left branch is correct", {
+  expect_equal(ptriang(0.25, min = 0, max = 1, mode = 0.5), 0.25^2 / (1 * 0.5))
+})
+
+test_that("ptriang right branch is correct", {
+  expect_equal(ptriang(0.75, min = 0, max = 1, mode = 0.5), 1 - 0.25^2 / (1 * 0.5))
+})
+
+test_that("ptriang lower.tail = FALSE works", {
+  p <- ptriang(0.3, min = 0, max = 1, mode = 0.5)
+  expect_equal(ptriang(0.3, min = 0, max = 1, mode = 0.5, lower.tail = FALSE), 1 - p)
+})
+
+test_that("ptriang is vectorized", {
+  result <- ptriang(c(0, 0.5, 1), min = 0, max = 1, mode = 0.5)
+  expect_equal(result, c(0, 0.5, 1))
+})
+
+test_that("ptriang stops with invalid parameters", {
+  expect_error(ptriang(0.5, min = 1, max = 0, mode = 0.5))
+  expect_error(ptriang(0.5, min = 0, max = 1, mode = 2))
+})
+
+test_that("ptriang and qtriang are inverse", {
+  p <- seq(0.1, 0.9, length.out = 10)
+  x <- qtriang(p, 0, 1, 0.5)
+  expect_equal(ptriang(x, 0, 1, 0.5), p, tolerance = 1e-6)
 })
