@@ -108,3 +108,29 @@ qtriang <- function(p, min = 0, max = 1, mode = 0.5) {
     max - sqrt((1 - p) * (max - min) * (max - mode + 1e-10))
   )
 }
+
+
+#' Random generation for the triangular distribution
+#'
+#' @param n Number of random values to generate.
+#' @param min Lower limit of the distribution.
+#' @param max Upper limit of the distribution.
+#' @param mode Mode (peak) of the distribution.
+#'
+#' @return A numeric vector of n random values.
+#' @export
+#'
+#' @examples
+#' set.seed(42)
+#' rtriang(10, min = 0, max = 1, mode = 0.5)
+rtriang <- function(n, min = 0, max = 1, mode = 0.5) {
+  if (any(min >= max)) {
+    stop("'min' must be strictly less than 'max'")
+  }
+  if (any(mode < min | mode > max)) {
+    stop("'mode' must be between 'min' and 'max'")
+  }
+
+  qtriang(stats::runif(n), min = min, max = max, mode = mode)
+}
+
