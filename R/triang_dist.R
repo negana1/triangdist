@@ -30,7 +30,7 @@ dtriang <- function(x, min = 0, max = 1, mode = 0.5, log = FALSE) {
     )
   )
 
-  if (log) return(base::log(dens))
+  if (log) dens <- log(dens)
   dens
 }
 
@@ -71,7 +71,7 @@ ptriang <- function(q, min = 0, max = 1, mode = 0.5, lower.tail = TRUE) {
     )
   )
 
-  if (!lower.tail) return(1 - prob)
+  if (!lower.tail) prob <- 1 - prob
   prob
 }
 
