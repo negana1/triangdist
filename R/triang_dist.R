@@ -78,7 +78,7 @@ ptriang <- function(q, min = 0, max = 1, mode = 0.5, lower.tail = TRUE) {
 
 #' Quantile function of the triangular distribution
 #'
-#' @param p Vector of probabilities. Must be in [0, 1].
+#' @param p Vector of probabilities. Must be in `[0, 1]`.
 #' @param min Lower limit of the distribution.
 #' @param max Upper limit of the distribution.
 #' @param mode Mode (peak) of the distribution.
