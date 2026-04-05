@@ -1,6 +1,3 @@
-library(testthat)
-
-
 # Tests for dtriang
 # -------------------------
 
