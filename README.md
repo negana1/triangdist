@@ -28,3 +28,4 @@ qtriang(0.5, min = 0, max = 1, mode = 0.5)
 # Random sample
 set.seed(42)
 rtriang(10, min = 0, max = 1, mode = 0.5)
+```
