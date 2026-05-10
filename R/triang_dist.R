@@ -41,7 +41,7 @@ dtriang <- function(x, min = 0, max = 1, mode = 0.5, log = FALSE) {
 #' @param min Lower limit of the distribution.
 #' @param max Upper limit of the distribution.
 #' @param mode Mode (peak) of the distribution.
-#' @param lower.tail Logical; if TRUE (default), probabilities are P(X <= q).
+#' @param lower_tail Logical; if TRUE (default), probabilities are P(X <= q).
 #'
 #' @return A numeric vector of probabilities.
 #' @export
@@ -49,7 +49,7 @@ dtriang <- function(x, min = 0, max = 1, mode = 0.5, log = FALSE) {
 #' @examples
 #' ptriang(0.5, min = 0, max = 1, mode = 0.5)
 #' ptriang(c(0, 0.5, 1), min = 0, max = 1, mode = 0.3)
-ptriang <- function(q, min = 0, max = 1, mode = 0.5, lower.tail = TRUE) {
+ptriang <- function(q, min = 0, max = 1, mode = 0.5, lower_tail = TRUE) {
   if (any(min >= max)) {
     stop("'min' must be strictly less than 'max'")
   }
@@ -70,7 +70,7 @@ ptriang <- function(q, min = 0, max = 1, mode = 0.5, lower.tail = TRUE) {
       )
     )
   )
-  if (!lower.tail) prob <- 1 - prob
+  if (!lower_tail) prob <- 1 - prob
   prob
 }
 
